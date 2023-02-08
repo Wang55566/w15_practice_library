@@ -1,4 +1,4 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 
@@ -33,8 +33,9 @@ describe('04 - Display a Book\'s Details', () => {
       });
       const link = screen.getByRole('link', { name: "Book #1"});
       userEvent.click(link);
-      await waitForElementToBeRemoved(link);
-      expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><section>ID: 1<br>Title: The Count of Monte Cristo<br>Author: Alexandre Dumas<br><button>Check Out</button><br><a href=\"/\">Back to Books List</a></section>");
+      await waitFor(() => {
+        expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><section>ID: 1<br>Title: The Count of Monte Cristo<br>Author: Alexandre Dumas<br><button>Check Out</button><br><a href=\"/\">Back to Books List</a></section>");
+      });
     });
 
     it('should show the fourth book when the "Book #4" text link is clicked', async () => {
@@ -43,8 +44,9 @@ describe('04 - Display a Book\'s Details', () => {
       });
       const link = screen.getByRole('link', { name: "Book #4"});
       userEvent.click(link);
-      await waitForElementToBeRemoved(link);
-      expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><section>ID: 4<br>Title: Harry Potter and the Philosopher's Stone<br>Author: J.K. Rowling<br><button>Check Out</button><br><a href=\"/\">Back to Books List</a></section>");
+      await waitFor(() => {
+        expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><section>ID: 4<br>Title: Harry Potter and the Philosopher's Stone<br>Author: J.K. Rowling<br><button>Check Out</button><br><a href=\"/\">Back to Books List</a></section>");
+      });
     });
   });
 
@@ -57,8 +59,9 @@ describe('04 - Display a Book\'s Details', () => {
   //     });
   //     const link = screen.getByRole('link', { name: "Book #1"});
   //     userEvent.click(link);
-  //     await waitForElementToBeRemoved(link);
-  //     expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><section>ID: 1<br>Title: The Count of Monte Cristo<br>Author: Alexandre Dumas<br><button>Check Out</button><br><a href=\"/\">Back to Books List</a></section>");
+  //     await waitFor(() => {
+  //       expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><section>ID: 1<br>Title: The Count of Monte Cristo<br>Author: Alexandre Dumas<br><button>Check Out</button><br><a href=\"/\">Back to Books List</a></section>");
+  //     });
   //     const checkOutButton = screen.getByRole('button', { name: "Check Out" });
   //     userEvent.click(checkOutButton);
   //     await screen.findByText('Return');

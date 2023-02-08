@@ -1,4 +1,4 @@
-import { screen, waitForElementToBeRemoved, fireEvent } from '@testing-library/react';
+import { screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 
@@ -33,8 +33,9 @@ describe('06 - Update a Book', () => {
       });
       const link = screen.getAllByRole('link', { name: "Edit"})[0];
       userEvent.click(link);
-      await waitForElementToBeRemoved(link);
-      expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><form><h2>Update Book</h2><label>Title<input type=\"text\" value=\"The Count of Monte Cristo\"></label><label>Author<textarea>Alexandre Dumas</textarea></label><input type=\"submit\" value=\"Update Book\"></form>");
+      await waitFor(() => {
+        expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><form><h2>Update Book</h2><label>Title<input type=\"text\" value=\"The Count of Monte Cristo\"></label><label>Author<textarea>Alexandre Dumas</textarea></label><input type=\"submit\" value=\"Update Book\"></form>");
+      });
 
       const titleInput = screen.getByLabelText('Title');
       const authorInput = screen.getByLabelText('Author');
@@ -48,8 +49,9 @@ describe('06 - Update a Book', () => {
       });
       const link = screen.getAllByRole('link', { name: "Edit"})[0];
       userEvent.click(link);
-      await waitForElementToBeRemoved(link);
-      expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><form><h2>Update Book</h2><label>Title<input type=\"text\" value=\"The Count of Monte Cristo\"></label><label>Author<textarea>Alexandre Dumas</textarea></label><input type=\"submit\" value=\"Update Book\"></form>");
+      await waitFor(() => {
+        expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><form><h2>Update Book</h2><label>Title<input type=\"text\" value=\"The Count of Monte Cristo\"></label><label>Author<textarea>Alexandre Dumas</textarea></label><input type=\"submit\" value=\"Update Book\"></form>");
+      });
 
       const titleInput = screen.getByLabelText('Title');
       const authorInput = screen.getByLabelText('Author');
@@ -65,9 +67,9 @@ describe('06 - Update a Book', () => {
 
       const submitBtn = screen.getByRole('button', { name: "Update Book"});
       userEvent.click(submitBtn);
-      await waitForElementToBeRemoved(submitBtn);
-
-      expect(container.innerHTML).toMatch(new RegExp(`<h1>aA Lending Library</h1><section>ID: 1<br>Title: ${titleValue}<br>Author: ${authorValue}<br><button>Check Out</button><br><a href=\"/\">Back to Books List</a></section>`));
+      await waitFor(() => {
+        expect(container.innerHTML).toMatch(new RegExp(`<h1>aA Lending Library</h1><section>ID: 1<br>Title: ${titleValue}<br>Author: ${authorValue}<br><button>Check Out</button><br><a href=\"/\">Back to Books List</a></section>`));
+      });
     });
   });
 });

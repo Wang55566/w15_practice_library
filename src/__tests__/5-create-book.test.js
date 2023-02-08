@@ -1,4 +1,4 @@
-import { screen, waitForElementToBeRemoved, fireEvent, waitFor } from '@testing-library/react';
+import { screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 
@@ -33,8 +33,9 @@ describe('05 - Create a Book', () => {
       });
       const link = screen.getByRole('link', { name: "Add New Book"});
       userEvent.click(link);
-      await waitForElementToBeRemoved(link);
-      expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><form><h2>Create Book</h2><label>Title<input type=\"text\" value=\"\"></label><label>Author<textarea></textarea></label><input type=\"submit\" value=\"Create Book\"></form>");
+      await waitFor(() => {
+        expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><form><h2>Create Book</h2><label>Title<input type=\"text\" value=\"\"></label><label>Author<textarea></textarea></label><input type=\"submit\" value=\"Create Book\"></form>");
+      });
 
       const titleInput = screen.getByLabelText('Title');
       const authorInput = screen.getByLabelText('Author');
@@ -50,9 +51,9 @@ describe('05 - Create a Book', () => {
 
       const submitBtn = screen.getByRole('button', { name: "Create Book"});
       userEvent.click(submitBtn);
-      await waitForElementToBeRemoved(submitBtn);
-
-      expect(container.innerHTML).toMatch(new RegExp(`<h1>aA Lending Library</h1><section>ID: .{5}<br>Title: ${titleValue}<br>Author: ${authorValue}<br><button>Check Out</button><br><a href=\"/\">Back to Books List</a></section>`));
+      await waitFor(() => {
+        expect(container.innerHTML).toMatch(new RegExp(`<h1>aA Lending Library</h1><section>ID: .{5}<br>Title: ${titleValue}<br>Author: ${authorValue}<br><button>Check Out</button><br><a href=\"/\">Back to Books List</a></section>`));
+      });
     });
   });
 });

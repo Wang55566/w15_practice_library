@@ -1,4 +1,4 @@
-import { screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 
@@ -25,8 +25,9 @@ describe('07 - Reset Book Data', () => {
       // Try deleting the fourth record
       const deleteBookBtn = screen.getAllByRole('button', { name: "Delete" })[3];
       userEvent.click(deleteBookBtn);
-      await waitForElementToBeRemoved(deleteBookBtn);
-      expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><section><ul><li><a href=\"/books/1\">Book #1</a><a href=\"/books/1/edit\">Edit</a><button>Delete</button></li><li><a href=\"/books/2\">Book #2</a><a href=\"/books/2/edit\">Edit</a><button>Delete</button></li><li><a href=\"/books/3\">Book #3</a><a href=\"/books/3/edit\">Edit</a><button>Delete</button></li><li><a href=\"/books/5\">Book #5</a><a href=\"/books/5/edit\">Edit</a><button>Delete</button></li></ul><a href=\"/books/new\">Add New Book</a><button>Reset Book Data</button></section>");
+      await waitFor(() => {
+        expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><section><ul><li><a href=\"/books/1\">Book #1</a><a href=\"/books/1/edit\">Edit</a><button>Delete</button></li><li><a href=\"/books/2\">Book #2</a><a href=\"/books/2/edit\">Edit</a><button>Delete</button></li><li><a href=\"/books/3\">Book #3</a><a href=\"/books/3/edit\">Edit</a><button>Delete</button></li><li><a href=\"/books/5\">Book #5</a><a href=\"/books/5/edit\">Edit</a><button>Delete</button></li></ul><a href=\"/books/new\">Add New Book</a><button>Reset Book Data</button></section>");
+      });
 
       // Reset all records to initial record data
       const resetBooksDataBtn = screen.getByRole('button', { name: "Reset Book Data" });
@@ -58,8 +59,9 @@ describe('07 - Reset Book Data', () => {
       // Try deleting the second record
       const deleteBookBtn = screen.getAllByRole('button', { name: "Delete" })[1];
       userEvent.click(deleteBookBtn);
-      await waitForElementToBeRemoved(deleteBookBtn);
-      expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><section><ul><li><a href=\"/books/43210\">Book #43210</a><a href=\"/books/43210/edit\">Edit</a><button>Delete</button></li></ul><a href=\"/books/new\">Add New Book</a><button>Reset Book Data</button></section>");
+      await waitFor(() => {
+        expect(container.innerHTML).toBe("<h1>aA Lending Library</h1><section><ul><li><a href=\"/books/43210\">Book #43210</a><a href=\"/books/43210/edit\">Edit</a><button>Delete</button></li></ul><a href=\"/books/new\">Add New Book</a><button>Reset Book Data</button></section>");
+      });
 
       // Reset all records to initial record data
       const resetBooksDataBtn = screen.getByRole('button', { name: "Reset Book Data" });

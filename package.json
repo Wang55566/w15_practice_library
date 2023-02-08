@@ -18,8 +18,8 @@
    "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --verbose --silent",
-    "test-with-json": "SKIP_PREFLIGHT_CHECK=true CI=true react-scripts test --outputFile=./test/score.json --json; node test/calculateScore.js"
+    "test": "react-scripts test --verbose --silent=false",
+    "test-with-json": "SKIP_PREFLIGHT_CHECK=true CI=true react-scripts test --silent --outputFile=./test/score.json --json; node test/calculateScore.js"
   },
   "eslintConfig": {
     "extends": "react-app"
