@@ -7,8 +7,9 @@ contains important information about running tests with Jest.
 
 ## Background
 
-You will be adding Redux onto a lending book library app called aA Lending Library. This application should allow for the creation, display, updating,
-and deletion of books.
+You will be adding Redux onto a lending book library app called aA Lending
+Library. This application should allow for the creation, display, updating, and
+deletion of books.
 
 This application allows the user to perform CRUD on books. Each book has
 four fields: `id`, `title`, `author`, and `checkedOut`.
