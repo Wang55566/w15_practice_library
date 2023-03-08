@@ -1,11 +1,16 @@
 import { Link, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { checkOut } from '../store/bookReducer';
 
 const BookShow = () => {
   const { bookId } = useParams();
-  const book = {};
+  const books = useSelector(state => state.books)
+  const book = books[bookId];
+  const dispatch = useDispatch();
 
   const changeCheckOut = (e) => {
     e.preventDefault();
+    dispatch(checkOut(book));
   };
 
   return (
